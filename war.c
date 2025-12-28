@@ -112,54 +112,6 @@ int main(void) {
 
 // --- Implementação de funções auxiliares ---
 
-void cadastrarTerritorio(Territorio mapa[], int *pQtd) {
-    if (*pQtd >= MAX_TERRITORIO) {
-        printf("Limite de territórios atingido (%d).\n", MAX_TERRITORIO);
-        return;
-    }
-
-    Territorio *t = &mapa[*pQtd];
-    printf("--- Cadastrar Território %d ---\n", *pQtd + 1);
-    printf("Nome: ");
-    if (fgets(t->nome, TAM_STRING, stdin) == NULL) {
-        t->nome[0] = '\0';
-    } else {
-        t->nome[strcspn(t->nome, "\n")] = '\0';
-    }
-
-    printf("Cor do Exército: ");
-    if (fgets(t->cor, TAM_STRING, stdin) == NULL) {
-        t->cor[0] = '\0';
-    } else {
-        t->cor[strcspn(t->cor, "\n")] = '\0';
-    }
-
-    printf("Número de Tropas: ");
-    if (scanf("%d", &t->tropas) != 1) {
-        t->tropas = 0;
-    }
-    limparBufferEntrada();
-
-    (*pQtd)++;
-    printf("Território cadastrado com sucesso!\n");
-}
-
-void listarTerritorios(const Territorio mapa[], int qtd) {
-    if (qtd == 0) {
-        printf("Nenhum território cadastrado.\n");
-        return;
-    }
-    printf("--- Lista de Territórios (%d) ---\n", qtd);
-    for (int i = 0; i < qtd; i++) {
-        printf("------------------------------------\n");
-        printf("Território %d\n", i + 1);
-        printf("Nome: %s\n", mapa[i].nome);
-        printf("Cor: %s\n", mapa[i].cor);
-        printf("Tropas: %d\n", mapa[i].tropas);
-    }
-}
-
-
 // --- Implementação das Funções ---
 
 // alocarMapa():
