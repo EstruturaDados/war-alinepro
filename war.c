@@ -16,7 +16,6 @@
 
 // Inclusão das bibliotecas padrão necessárias para entrada/saída, alocação de memória, manipulação de strings e tempo.
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 // --- Constantes Globais ---
@@ -44,7 +43,11 @@ int c;
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
-int main() {
+int main(void) {
+        struct territorio Territorio[MAX_TERRITORIO];
+    int territorio = 0;
+    int opcao;
+
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
@@ -52,6 +55,79 @@ int main() {
     // - Preenche os territórios com seus dados iniciais (tropas, donos, etc.).
     // - Define a cor do jogador e sorteia sua missão secreta.
 
+    do {
+        printf("===========================\n");
+        printf("   VAMOS CADASTRAR 5 TERRITÓRIOS INICIAIS DO NOSSO MUNDO!\n");
+        printf("===========================\n");
+        printf("------CADASTRANDO TERRITÓRIOS------\n");
+        printf("Sair\n");
+        printf("-----------------------------------\n");
+        printf("Escolha uma opção: ");
+
+        if (scanf("%d", &opcao) != 1) {
+            limparBufferEntrada();
+            opcao = -1;
+        }
+        limparBufferEntrada();
+switch (opcao) {
+            case 1:
+                printf("--- Território 1 ---\n\n");
+                if (territorio < MAX_TERRRITORIO) {
+                    printf("Território: \n");
+                    fgets(Territorio[territorio].nome, TAM_STRING, stdin);
+
+                    printf("Cor do Exército: \n");
+                    fgets(Territorio[territorio].cor, TAM_STRING, stdin);
+
+                    printf("Número de Tropas: \n");
+                    fgets(Territorio[territorio].tropa, TAM_STRING, stdin);
+
+                    Territorio[territorio].nome[strcspn(Territorio[territorio].nome, "\n")] = '\0';
+                    Territorio[territorio].cor[strcspn(Territorio[territorio].cor, "\n")] = '\0';
+                    Territorio[territorio].tropa[strcspn(Territorio[territorio].tropa, "\n")] = '\0';
+
+                    printf("Digite o número de tropas: ");
+                    if (scanf("%d", &Territorio[territorio].tropa) != 1) {
+                        Territorio[territorio].tropa = 0;
+                    }
+                    limparBufferEntrada();
+
+                    territorio++;
+                    printf("\nTerritótio cadastrado com sucesso!\n");
+                } else {
+                    printf("Não é possível cadastrar mais territórios.\n");
+                }
+                break;
+        if (territorio =< 5) {
+                    printf("Nenhum Território cadastrado\n");
+                } else {
+                    for (int i = 0; i < territorio; i++) {
+                        printf("------------------------------------\n");
+                        printf("Territorios %d\n", i + 1);
+                        printf("Nome: %s\n", territorio[i].nome);
+                        printf("cor: %s\n", territorio[i].cor);
+                        printf("tropas: %s\n", territorio[i].tropa);
+                       }
+                }
+                printf("------------------------------------\n");
+                printf("Pressione ENTER para continuar\n");
+                getchar();
+                break;
+
+            case 0:
+                printf("Saindo do sistema\n");
+                break;
+
+            default:
+                printf("OPÇÃO INVÁLIDA!\n");
+                printf("Pressione ENTER para continuar\n");
+                getchar();
+                break;
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
     // - A cada iteração, exibe o mapa, a missão e o menu de ações.
