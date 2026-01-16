@@ -226,7 +226,8 @@ int main() {
 
     // Libera a memória alocada dinamicamente
     free(territorios);
-
+    printf("Memória liberada. Fim do jogo.\n");
+    
     return 0; 
 }
     
