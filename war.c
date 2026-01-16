@@ -96,8 +96,7 @@ int main(void) {
         }
     } while (opcao != 0);
 
-    return 0;
-}
+  
     // 2. Laço Principal do Jogo (Game Loop):
     // - Roda em um loop 'do-while' que continua até o jogador sair (opção 0) ou vencer.
     // - A cada iteração, exibe o mapa, a missão e o menu de ações.
@@ -106,7 +105,77 @@ int main(void) {
     //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+    do{
+        printf("============================\n");
+        printf("        MAPA ATUAL\n");
+        printf("============================\n");
+        // Exibir o mapa atual
+        printf("Território       | Cor do Exército | Tropas\n");
+        printf("--------------------------------------------\n");
+        for(int i = 0; i < qtd; i++){
+            printf("%-16s | %-15s | %d\n", mapa[i].nome, mapa[i].cor, mapa[i].tropas);
+        }
+        printf("\n");
+        //Ataque
+        printf("1 - Atacar\n");
+        printf("2 - Verificar Missão\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opção: "); 
+        if (scanf("%d", &opcao) != 1) {
+            limparBufferEntrada();
+            opcao = -1;
+        }
+        limparBufferEntrada();
+        switch(opcao){
+            case 1:
+                printf("Fase de ataque iniciada...\n");
+                // Chamar função de ataque aqui
+                for(int i = 0; i < qtd; i++){
+                    printf("%d - %s\n", i+1, mapa[i].nome);
+                }
+                printf("Escolha o território de origem: ");
+                int origem, destino;
+                if (scanf("%d", &origem) != 1 || origem < 1 || origem > qtd) {
+                    limparBufferEntrada();
+                    printf("Território inválido!\n");   
+                }        
+                break;
+            case 2:
+                printf("Verificando missão...\n");
+                // Chamar função de verificação de missão aqui
+                for(int i = 0; i < qtd; i++){
+                    printf("%d - %s\n", i+1, mapa[i].nome);
+                }
+                printf("Escolha o território de destino: ");
+                if (scanf("%d", &destino) != 1 || destino < 1 || destino > qtd) {
+                    limparBufferEntrada();
+                    printf("Território inválido!\n");   
+                }
+                break;
+            case 0:
+                printf("Encerrando o jogo...\n");
+                break;
+            default:
+                printf("OPÇÃO INVÁLIDA!\n");
+                break;
+        }       printf("\nPressione ENTER para continuar...");
+        getchar();
+         while(opcao != 0 /* && condição de vitória não alcançada */);
+    printf("Obrigado por jogar!\n");
+    }
 
+        free(mapa);
+        free(missao);
+        free(corJogador);
+        free(territorios);
+        free(tropas);
+        free(donos);
+        free(ataques);
+
+
+
+      return 0;
+}
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
 
