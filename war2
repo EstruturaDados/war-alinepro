@@ -202,11 +202,11 @@ void atacar(Territorio *t, int atk, int def) {
 void inicializarTerritorios(Territorio *t) {
 
     const char *nomes[] = {
-        "Floresta Sombria",
-        "Deserto Escarlate",
-        "Ilhas do Norte",
-        "Planície Central",
-        "Montanha Negra"
+        "América",
+        "África",
+        "Europa",
+        "Oceania",
+        "Ásia"
     };
 
     const char *cores[] = {
@@ -214,7 +214,7 @@ void inicializarTerritorios(Territorio *t) {
         "Azul",
         "Vermelho",
         "Amarelo",
-        "Verde"
+        "Branco"
     };
 
     // Inicializa cada território com nome, cor e tropas
